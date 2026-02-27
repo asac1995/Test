@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NaReal</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>NaReal</h1>
+      <div class="top-actions">
+        <button id="myPostBtn" class="btn secondary">Meu Post</button>
+        <button id="notifBtn" class="notif" aria-label="Notificações">
+          🔔 <span id="notifCount" class="badge">0</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="swipeArea">
+      <section class="post-card" id="postCard">
+        <p id="postText">Carregando...</p>
+        <div class="card-actions">
+          <button id="openComments" class="btn small">💬 <span id="commentCount">0</span></button>
+          <div id="timer">--:--:--</div>
+        </div>
+      </section>
+
+      <section class="compose">
+        <h2>Publique anonimamente</h2>
+        <textarea id="postInput" maxlength="<%= maxPostLength %>" placeholder="Até <%= maxPostLength %> caracteres..."></textarea>
+        <div class="compose-footer">
+          <span id="postChars">0/<%= maxPostLength %></span>
+          <button id="publishBtn" class="btn">Publicar/Substituir</button>
+        </div>
+      </section>
+    </main>
+
+    <div id="commentModal" class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Comentários</h3>
+          <button id="closeModal" class="btn secondary">Fechar</button>
+        </div>
+        <div id="commentsList" class="comments-list"></div>
+        <div id="quotePreview" class="quote-preview hidden"></div>
+        <div class="comment-form">
+          <textarea id="commentInput" maxlength="<%= maxCommentLength %>" placeholder="Comente anonimamente..."></textarea>
+          <div class="compose-footer">
+            <span id="commentChars">0/<%= maxCommentLength %></span>
+            <button id="sendComment" class="btn">Enviar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      window.APP_CONFIG = {
+        maxPostLength: <%= maxPostLength %>,
+        maxCommentLength: <%= maxCommentLength %>
+      };
+    </script>
+    <script src="/js/app.js"></script>
+  </body>
+</html>
